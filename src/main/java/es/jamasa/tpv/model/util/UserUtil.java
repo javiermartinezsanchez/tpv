@@ -1,0 +1,65 @@
+package es.jamasa.tpv.model.util;
+
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+/**
+ * Clase de utilidad para obtener datos del ROL del usuario directamente de su {@link Authentication}, sin tener que consultar a la BD constantemente.
+ * <ul>
+ * <li>Asignación de ruta lógica de acuerdo al ROL principal</li>
+ * <li>Devolución del ROL del usuario</li>
+ * </ul>
+ * 
+ */
+public class UserUtil {
+
+	/**
+	 *   Nos define la url base a partir del rol
+	 *   
+	 *   <ul>
+	 *   <li>ROLE_ADMIN -> /admin </li>
+	 *   <li>ROLE_VENDE -> /vendedor </li>
+	 *   <li>Si no está logado: -> "" </li>
+	 *   
+	 *   </ul>
+	 * @param roles Es un Set de cadenas (normalmente de Authorities).
+	 * @return Se devuelve la ruta para cada rol.
+	 */
+	public static String defineHome(Set<String> roles) {
+	    if (roles.contains("ROLE_ADMIN")) {
+	        return "/admin";
+	    }
+	    if (roles.contains("ROLE_VENDE")) {
+	        return "/vendedor";
+	    }
+	    return "";
+     }
+	
+	/**
+	 * Nos devuelve una colección con los roles de un usuario.
+	 * 
+	 * @param authentication Authentication de Spring
+	 * @return Colección de Roles.
+	 */
+	 public static Set<String> getRoles(Authentication authentication) {
+		Set<String> roles = authentication.getAuthorities()
+                .stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toSet());
+		return roles;
+	 }
+	/**
+	 * Nos devuelve el ROL de un usuario.
+	 * 
+	 * @param authentication Authentication de Spring
+	 * @return Rol del usuario o "" si no está authenticado.
+	 */
+	 public static String getRol(Authentication authentication) {
+		 return getRoles(authentication).stream()
+				 .findFirst()
+				 .orElse("");
+	 }
+	 
+}

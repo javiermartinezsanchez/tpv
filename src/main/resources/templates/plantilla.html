@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org" th:fragment="layout(content)"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+   <meta charset="UTF-8">
+   <meta name="_csrf" th:content="${_csrf.token}"/>
+   <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+   <meta name="context-path" th:content="@{/}" />
+   <link rel="stylesheet" th:href="@{/webjars/bootstrap/{version}/css/bootstrap.min.css(version=${@webjarsConfig.bootstrap})}" />
+   <link rel="stylesheet" th:href="@{/webjars/bootstrap-icons/{version}/font/bootstrap-icons.css(version=${@webjarsConfig.bootstrapicons})}"/>
+   <link rel="stylesheet" th:href="@{/css/app.css}">
+   <script th:src="@{/webjars/bootstrap/{version}/js/bootstrap.bundle.min.js(version=${@webjarsConfig.bootstrap})}"></script>
+ 
+   <title th:text="${title} ?: 'Mi Aplicación'"></title>
+   <link rel="icon" type="image/png" th:href="@{/images/favicon.png}">
+ </head>
+<body>
+<div th:replace="~{fragments/header :: nav}"></div>
+<main class="container mt-4">
+<div th:replace="${content} ?: ~{}"></div>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

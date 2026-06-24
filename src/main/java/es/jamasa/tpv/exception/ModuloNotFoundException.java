@@ -1,0 +1,17 @@
+package es.jamasa.tpv.exception;
+
+/**
+ * Excepción por "módulo no encontrado" al buscarlo en un curso.
+ */
+public final class ModuloNotFoundException extends NotDataFoundException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5724092550805323431L;
+
+	public ModuloNotFoundException(String messageKey, Object dto, String... args) {
+		super(messageKey, dto, args);
+	}
+
+}

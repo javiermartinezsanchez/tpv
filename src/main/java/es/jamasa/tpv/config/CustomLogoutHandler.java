@@ -1,0 +1,52 @@
+package es.jamasa.tpv.config;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.time.LocalDateTime;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.stereotype.Component;
+
+import es.jamasa.tpv.model.entities.UserAudit;
+import es.jamasa.tpv.model.repository.UserAuditRepository;
+/**
+ * Manejador propio de "Logout".
+ * 
+ * <p> Si está autenticado se elimina de {@link SessionRegistry} y
+ * añadimos el evento "LOGOUT" en nuestra tabla de auditoría de accesos.
+ */
+@Component
+public class CustomLogoutHandler implements LogoutHandler {
+
+    private static final Logger log = LoggerFactory.getLogger(CustomLogoutHandler.class);
+
+    @Autowired
+	UserAuditRepository audit;
+    
+    private final SessionRegistry sessionRegistry;
+    
+    private CustomLogoutHandler(SessionRegistry sessionRegistry) {
+    	this.sessionRegistry = sessionRegistry ;   }
+ 
+    @Override
+    public void logout(HttpServletRequest request,
+                       HttpServletResponse response,
+                       Authentication authentication) {
+
+        if (authentication != null && authentication.getName() != null) {
+            String username = authentication.getName();
+            String ip = request.getRemoteAddr();
+            String sessionId = request.getSession().getId();
+            sessionRegistry.removeSessionInformation(sessionId);
+    		audit.save(new UserAudit(username, "Logout usuario desde la IP: " + ip, LocalDateTime.now()));
+            log.info("Logout | usuario={} | ip={}", username, ip);
+        }
+    }
+}
+

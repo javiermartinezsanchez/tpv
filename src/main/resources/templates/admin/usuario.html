@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+th:replace="~{plantilla::layout(~{::section})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<section>
+<h1 th:text="#{usuario.title}">Título</h1>
+<div th:replace="~{fragments/mensajesresultado :: mensajes}"></div>
+<form th:action="@{${url}}" th:object="${form}" method="post">
+<div th:replace="~{fragments/frmUsuario :: frmUsuario}"></div>
+<div th:replace="~{fragments/botones :: btnGroup(#{command.save}, #{command.cancel}, ${urlCancel})}"></div>
+</form>
+<div th:replace="~{fragments/mensajesresultado :: errorgeneral}"></div>
+</section>
+</body>
+</html>

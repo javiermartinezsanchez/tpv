@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vista Previa de Códigos de Barras</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        .actions {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .btn-print {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        /* Contenedor en forma de cuadrícula para las etiquetas */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+        }
+        .barcode-card {
+            background: white;
+            padding: 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+            border-radius: 4px;
+        }
+        .barcode-card img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* === CONFIGURACIÓN EXCLUSIVA PARA IMPRESIÓN === */
+        @media print {
+            .actions {
+                display: none; /* Oculta el botón de imprimir en el papel */
+            }
+            body {
+                background-color: white;
+                margin: 0;
+            }
+            .grid-container {
+                display: block; /* Ajuste para evitar cortes extraños en algunas impresoras */
+            }
+            .barcode-card {
+                page-break-inside: avoid; /* Evita que una etiqueta se corte a la mitad entre páginas */
+                display: inline-block;
+                width: 45%; /* Ajusta según el tamaño de tu papel adhesivo */
+                margin: 2%;
+                border: 1px dashed #ccc; /* Guía de corte opcional */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="actions">
+        <h2>Vista Previa de Impresión</h2>
+        <!-- Llama a la ventana de impresión nativa del navegador -->
+        <button class="btn-print" onclick="window.print()">Imprimir Etiquetas</button>
+    </div>
+
+    <div class="grid-container">
+        <!-- Iterar sobre la lista de códigos en formato Base64 -->
+        <div class="barcode-card" th:each="base64Code : ${barcodes}">
+            <img th:src="'data:image/png;base64,' + ${base64Code}" alt="Código de barras" />
+        </div>
+    </div>
+
+</body>
+</html>

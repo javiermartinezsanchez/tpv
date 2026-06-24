@@ -1,0 +1,32 @@
+package es.jamasa.tpv.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import es.jamasa.tpv.service.RolService;
+
+/**
+ * Controlador de mantenimiento de ROLES (Sólo a efectos de admin).
+ * 
+ * Accedemos al listado y mantenimiento de roles para el Administrador.
+ * Se accede al registro y la modificación en "mi Perfil" para cada usuario.
+ */
+
+@Controller
+public class RolController {
+
+	private RolService rolService;
+
+	public RolController(RolService rolService) {
+		super();
+		this.rolService = rolService;
+	}
+
+	@GetMapping("/admin/rol")
+	public String listaRol(Model model) {
+		model.addAttribute("urlBack", "/home");
+	    model.addAttribute("lista", rolService.getList());
+		return "admin/roles";
+	}
+}

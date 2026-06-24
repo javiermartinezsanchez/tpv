@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+	th:replace="~{plantilla::layout(~{::section})}"><head>
+<meta charset="utf-8">
+<title th:text="#{usuario.lista}">Título</title>
+</head>
+<body>
+<section>
+	<div class="container">
+		<div class="d-flex justify-content-between align-items-center mb-4">
+	        <h1 class="mb-0" th:text="#{comun.lista(#{usuarios.conectados})}">Título</h1>
+	        <div class="d-flex gap-2">
+	            <a th:replace="~{fragments/botones :: btnVolver(${urlBack})}"></a>
+	        </div>
+	    </div>		   
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<th th:text="#{usuario.email}">default</th>
+					<th th:text="#{usuario.lastactivity}"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="usuario : ${usuarios}">
+					<td th:utext="${usuario.usuario}">ID</td>
+		 			<td th:utext="${#dates.format(usuario.lastRequest, 'dd/MM/yyyy HH:mm:ss')}">ID</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</section>
+</body>
+</html>

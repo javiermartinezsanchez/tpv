@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="nav">
+    <div class="container-fluid">
+
+        <a class="navbar-brand" th:href="@{/}"><i class="bi bi-house"></i> TPV-DRAFT </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav" >
+             <ul class="navbar-nav ms-auto">
+             	 <li class="nav-item">
+                        <a class="nav-link" th:href="@{/docs/memoria.pdf}" target="_blank"><i class="bi bi-journals"></i><span th:text="#{menu.manualusuario}"></span></a>
+                 </li>
+                 <li class="nav-item dropdown" sec:authorize="!isAuthenticated()">
+                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                     <span th:text="#{login.initSession}"></span>
+                     </a>
+                     <ul class="dropdown-menu">
+                       <li class="nav-item" >
+			           <a class="dropdown-item" th:href="@{/login}"><i class="bi-box-arrow-in-right"></i> Login</a>
+			           </li>
+			         </ul>
+			     </li>
+      			 <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+        			<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+          			<i class="bi bi-person-circle"></i>
+          			<span th:text="${#authentication.name}"></span>
+        		    </a>
+        		    <ul class="dropdown-menu">
+          		      <li class="nav-item" sec:authorize="isAuthenticated()">
+            		    <a class="dropdown-item" th:href="@{/miperfil}" > <i class="bi-person-fill"></i> <span th:text="#{estudiante.miperfil}"></span>
+            		    </a>
+          		      </li>      
+       
+	                  <li><hr class="dropdown-divider"></li>
+          		      <li class="nav-item" sec:authorize="isAuthenticated()">
+					     <form th:action="@{/logout}" method="post" class="dropdown-item">
+					      <button class="dropdown-item text-danger" type="submit" >
+    				       <i class="bi bi-box-arrow-right"></i> Logout
+  					      </button>
+					     </form>
+                      </li>
+        		    </ul>
+                  </li>  
+                  
+             </ul>
+             <ul class="navbar-nav mb-2 mb-lg-0">
+				<!-- Selector de idioma con banderas locales -->
+				<li class="nav-item dropdown">
+				    <a class="nav-link dropdown-toggle" href="#" role="button"
+				       data-bs-toggle="dropdown">
+				        🌐 <span th:text="#{lenguaje.selector}"/>
+				    </a>
+				
+				    <ul class="dropdown-menu dropdown-menu-end">
+				
+				        <!-- Español -->
+				        <li>
+				            <a class="dropdown-item"
+				               th:href="${urlBuilder?.cloneBuilder()?.replaceQueryParam('lang', 'es')?.toUriString() ?: ''}">
+				                <img th:src="@{/images/flags/es.png}" alt="ES" style="width:20px" class="me-2">
+				                <span th:text="#{lenguaje.es}"/>
+				            </a>
+				        </li>
+				
+				        <!-- Inglés -->
+				        <li>
+				            <a class="dropdown-item"
+				               th:href="${urlBuilder?.cloneBuilder()?.replaceQueryParam('lang', 'en')?.toUriString() ?: ''}">
+				                <img th:src="@{/images/flags/gb.png}" alt="EN" style="width:20px" class="me-2">
+				                <span th:text="#{lenguaje.en}"/>
+				            </a>
+				        </li>
+				
+				    </ul>
+				</li>
+            </ul>
+
+        </div>
+    </div>
+</nav>

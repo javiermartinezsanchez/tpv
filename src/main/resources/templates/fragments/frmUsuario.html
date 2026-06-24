@@ -1,0 +1,247 @@
+<div th:fragment="frmUsuario">
+	<input type="hidden" th:field="*{id}" />
+<div class="row align-items-end">
+    <div class="col-md-5 mb-3">
+        <label class="form-label fw-semibold" th:text="#{usuario.email}">Email</label>
+        <input type="email" th:field="*{email}" class="form-control">
+        <div class="text-danger small" th:errors="*{email}"></div>
+    </div>
+    <div class="col-md-5 mb-3">
+        <div th:if="${isUser}">
+            <label class="form-label fw-semibold" th:text="#{usuario.role}">Rol</label>
+            <input type="text" th:field="*{rol}" readonly class="form-control-plaintext">
+        </div>
+        <th:block th:unless="${isUser}">
+            <div th:replace="~{fragments/frmUsuario :: rolSelect(${roles}, 'rol', *{rol}, true, 'mb-0')}"></div>
+        </th:block>
+    </div>
+    <div th:unless="${isUser}" sec:authorize="hasRole('ADMIN')" class="col-md-2 mb-3 pb-2">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" 
+                   th:field="*{activo}" th:id="switchActivo">
+            <label class="form-check-label fw-bold ms-2" th:id="labelSwitchActivo" th:for="switchActivo"
+                   th:text="*{activo} ? #{usuario.estado.activo} : #{usuario.estado.inactivo}">
+                Activo
+            </label>
+        </div>
+    </div>
+
+</div>
+   <div th:if="*{id} == null">
+    <div  th:replace="~{fragments/frmChangePass :: frmChangePass}"></div>
+    </div>
+    <div class="mb-3" th:if="*{id} != null and *{id} != ''">
+        <div th:replace="~{fragments/botones :: btnLink(
+        #{command.modificar.password},
+        @{|${url}/password/{id}|(id=*{id})},
+        'btn-warning', 'bi bi-pencil-square'
+	    )}">
+    	</div>
+    
+    </div>
+    <div class="row">
+	    <div class="col-md-4 mb-3">
+	        <label class="form-label" th:text="#{comun.nombre('')}">Nombre</label>
+	        <input type="text" th:field="*{nombre}" class="form-control">
+	        <div class="text-danger" th:errors="*{nombre}"></div>
+	    </div>
+	    <div class="col-md-4 mb-3">
+	        <label class="form-label" th:text="#{usuario.apellido1}">Apellido1</label>
+	        <input type="text" th:field="*{apellido1}" class="form-control">
+	        <div class="text-danger" th:errors="*{apellido1}"></div>
+	    </div>
+	    <div class="col-md-4 mb-3">
+	        <label class="form-label" th:text="#{usuario.apellido2}">Apellido2</label>
+	        <input type="text" th:field="*{apellido2}" class="form-control">
+	        <div class="text-danger" th:errors="*{apellido2}"></div>
+	    </div>
+    </div>
+
+
+</div>
+<div th:fragment="rolSelect(rolList, fieldName, selectedValue, showErrors, colClass)" 
+     sec:authorize="hasRole('ADMIN')"
+     th:class="${colClass != null ? colClass + '' : ''}">
+    
+    <label class="form-label fw-semibold" th:text="#{usuario.role}">Rol</label>
+    
+    <select class="form-select" th:id="${fieldName}" th:name="${fieldName}">
+        <option th:value="${''}" th:text="#{rol.select}"></option>
+        <option th:each="r : ${rolList}"
+                th:value="${r.nombre}"
+                th:text="${r.descripcion}"
+                th:selected="${r.nombre == selectedValue}"> 
+        </option>
+    </select>
+    
+    <div class="text-danger small" th:if="${showErrors} and ${#fields.hasErrors(fieldName)}" th:errors="*{__${fieldName}__}"></div>
+</div>
+
+<div th:fragment="frmEstudiante()">
+    <div class="mb-1">
+        <label class="form-label" th:text="#{usuario.direccion}">Dirección</label>
+        <input type="text" th:field="*{direccion}" class="form-control">
+        <div class="text-danger" th:errors="*{direccion}"></div>
+    </div>
+	<div class="row g-3 mb-3">
+	    <div class="col-md-4">
+	        <label class="form-label" th:text="#{usuario.poblacion}">Población</label>
+	        <input type="text" th:field="*{poblacion}" class="form-control  w-50">
+	        <div class="text-danger" th:errors="*{poblacion}"></div>
+	    </div>
+	
+	    <div class="col-md-4">
+	        <label class="form-label" th:text="#{usuario.provincia}">Provincia</label>
+	        <input type="text" th:field="*{provincia}" class="form-control  w-50">
+	        <div class="text-danger" th:errors="*{provincia}"></div>
+	    </div>
+	
+	    <div class="col-md-4">
+	        <label class="form-label" th:text="#{usuario.codpostal}">Código Postal</label>
+	        <div class="col-5 col-md-5 clo-lg-4">
+	        <input type="text" th:field="*{codPostal}" class="form-control">
+	        </div>
+	        <div class="text-danger" th:errors="*{codPostal}"></div>
+	    </div>
+    </div>
+    <div class="row border rounded p-3">
+        <div class="col-md-6">
+            <h5 th:text="#{areatematica.estudiante.select}">Áreas de Interés Seleccionadas</h5>
+            <div class="area-list" id="listaSeleccionadas">
+                <!-- Aquí se renderizarán los checkboxes dinámicamente o estáticamente -->
+                <div th:each="area : ${form.areasInteres}" class="d-flex align-items-center justify-content-between mb-2 p-1 border-bottom">
+                    <i class="bi bi-check-square-fill text-secondary"></i>
+                    <input type="hidden" name="areasSeleccionadas" 
+                           th:value="${area.id}" 
+                           th:data-nombre="${area.titulo}"
+                           />
+                    <span th:text="${area.titulo}"></span>
+                    <!-- Botón pequeño para eliminar (opcional, requiere lógica extra) -->
+                    <button type="button" class="btn text-danger ms-auto" 
+							th:onclick="eliminarArea(this)"
+							th:data-id="${area.id}"
+							th:data-titulo="${area.titulo}">                       
+							<i class="bi bi-x-circle-fill"></i>
+                    </button>
+                </div>
+                <p id="mensajeSinAreas" th:if="${form.areasInteres == null or form.areasInteres.isEmpty()}" class="text-muted">
+                    No hay áreas seleccionadas.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 selectarea">
+            <h5 th:text="#{areatematica.estudiante.disponibles}">Áreas Disponibles</h5>
+            <div class="d-flex align-items-center gap-2">
+                <select th:replace="~{fragments/selectAreaTematica :: selectArea(${areas},${paramsBusqueda['areaId']})}">  
+        		</select>
+            
+            <button type="button" class="btn btn-primary btn-add ms-auto text-nowrap" onclick="agregarArea(this)">
+                <i class="bi bi-plus-lg"></i><span th:text="#{comun.addtolist}">Añadir a la lista</span>
+            </button>
+            </div>
+        </div>
+    </div>
+    <script>
+    // Función para agregar una área del select a la lista de checkboxes
+    function agregarArea(boton) {
+        const contenedor = boton.closest('.col-md-6');
+
+        if (!contenedor) {
+            console.error("No se encontró el contenedor .col-md-6");
+            return;
+        }
+        const select = contenedor.querySelector('select');
+
+        if (!select) {
+            return;
+        }
+        const idSeleccionado = select.value;
+        
+        if (idSeleccionado === "") {
+            return;
+        }
+
+        const nombreSeleccionado =select.options[select.selectedIndex].text;
+
+        const selectedOption = select.options[select.selectedIndex];
+        const listaContainer = document.getElementById('listaSeleccionadas');
+
+        if (select.value === "") {
+           return;
+        }
+
+        const areaId = select.value;
+        const areaNombre = selectedOption.text;
+        const checkboxes = document.querySelectorAll('input[name="areasSeleccionadas"]');
+        let yaExiste = false;
+        checkboxes.forEach(cb => {
+            if (cb.value === areaId) yaExiste = true;
+        });
+        const mensaje = document.getElementById('mensajeSinAreas');
+        if (mensaje) {
+            mensaje.classList.add('d-none'); 
+        }
+        if (yaExiste) {
+            return;
+        }
+        const divItem = document.createElement('div');
+        
+        divItem.innerHTML = `
+                <div class="d-flex align-items-center justify-content-between mb-2 p-1 border-bottom">
+            		<i class="bi bi-check-square-fill text-primary"></i>
+            		<input type="hidden" name="areasSeleccionadas" value="${areaId}" data-nombre="${areaNombre}" >
+                    <span class="text-truncate">${areaNombre}</span>
+                
+		            <button type="button" class="btn text-danger ms-auto" onclick="eliminarArea(this)" 
+		            		data-id="${areaId}" 
+		                    data-titulo="${areaNombre}">
+		                    <i class="bi bi-x-circle-fill"></i>
+		             </button>
+            	</div>
+        `;
+
+ 	    listaContainer.appendChild(divItem);
+        select.options[select.selectedIndex].disabled = true;
+ 
+        select.value = "";
+        
+    }
+
+    // Función para eliminar una área de la lista seleccionada
+    function eliminarArea(btn) {
+ 
+        const botonReal = btn.closest('button');
+        if (!botonReal) return;
+
+        const areaId = botonReal.getAttribute('data-id');
+        const areaNombre = botonReal.getAttribute('data-titulo');
+        const filaPadre = botonReal.closest('.row');
+        if (filaPadre) {
+            const select = filaPadre.querySelector('select');
+            if (select) {
+                for (let i = 0; i < select.options.length; i++) {
+                    if (select.options[i].value === areaId) {
+                        select.options[i].disabled = false;
+                        console.log("Reactivada área: " + areaNombre);
+                        break;
+                    }
+                }
+            } 
+        }
+
+        const divItem = botonReal.closest('.d-flex');
+        if (divItem) {
+            const inputs = document.querySelectorAll('input[name="areasSeleccionadas"][value="' + areaId + '"]');
+            inputs.forEach(input => input.remove());
+            divItem.remove(); 
+        }
+        const lista = document.getElementById('listaSeleccionadas');
+        const items = lista.querySelectorAll('.d-flex');
+        const mensaje = document.getElementById('mensajeSinAreas');
+        if (items.length === 0 ){
+        	mensaje.classList.remove('d-none');
+        }
+    }
+	</script>
+</div>

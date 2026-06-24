@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+	th:replace="~{plantilla::layout(~{::section})}"><head>
+<meta charset="utf-8">
+<title>Usuarios</title>
+</head>
+<body>
+<section>
+	<div class="container">
+		<div class="d-flex justify-content-between align-items-center mb-4">
+	        <h1 class="mb-0" th:text="#{comun.lista(#{impuesto.list})}">Título</h1>
+	        <div class="d-flex gap-2">
+	            <a th:replace="~{fragments/botones :: btnVolver(${urlBack})}"></a>
+	        </div>
+	    </div>
+	    <div class="form-group">
+		  <form th:fragment="formularioImpuesto" id="formularioImpuesto" class="row g-3 align-items-end mb-4" method="post" 
+		  th:action="@{${url}}"
+		  th:object="${impuesto}">		
+		  <input type="hidden" th:field="*{id}" />
+			<div class="col-md-2">
+               <label for="tipo" class="form-label fw-bold" th:text="#{impuesto.tipo}">Tipo de Impuesto</label>
+                <select class="form-select" id="tipo" th:field="*{tipo}" required>
+                    <option th:value="${''}" th:text="#{comun.select.any}">Seleccione tipo...</option>
+             		<option th:each="t : ${T(es.jamasa.tpv.model.entities.TipoImpuesto).values()}"
+                        th:value="${t}"
+                        th:text="${t}">
+                	</option>
+                </select>
+                <div class="invalid-feedback">Por favor, seleccione un tipo.</div>
+		    </div>
+			<div class="col-md-2">
+                   <label for="nombre" class="form-label fw-bold" th:text="#{comun.nombre('')}">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" th:field="*{nombre}" 
+                           placeholder="Ej. IVA General" maxlength="255" required>
+                    <div class="invalid-feedback">El nombre es obligatorio.</div>
+		    </div>		
+			<div class="col-md-2">
+                    <label for="p100" class="form-label fw-bold" th:text="#{impuesto.p100}">Porcentaje </label>(%)
+                    <div class="input-group">
+                        <input type="number" class="form-control" id="p100" th:field="*{p100}" 
+                               step="0.1" min="0" max="100" placeholder="0.0" required>
+                        <span class="input-group-text">%</span>
+                    </div>
+                    <div class="invalid-feedback">Introduzca un porcentaje válido.</div>
+		    </div>		
+			<div class="col-auto">
+			    <label class="form-label fw-bold" th:text="#{comun.fini}">Fecha Inicio</label>
+			    <input type="date" class="form-control" th:field="*{fechaIni}">
+			    <div class="text-danger" th:errors="*{fechaIni}"></div>
+			</div>
+			<div class="col-auto">
+			    <label class="form-label fw-bold" th:text="#{comun.fFin}">Fecha Inicio</label>
+			    <input type="date" class="form-control" th:field="*{fechaFin}">
+			    <div class="text-danger" th:errors="*{fechaFin}"></div>
+			</div>
+		    <div class="col-auto d-flex gap-2">
+			    <div th:insert="~{fragments/botones :: btnSubmit(
+			        #{command.save},
+			        'btn-primary w-100',
+			        'bi-save'
+			        )}">
+	            </div>
+            </div>
+          </form>
+        </div>
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+				    <th th:text="#{impuesto.tipo}">default</th>
+					<th th:text="#{comun.nombre('')}">default</th>
+					<th th:text="#{impuesto.p100}">default</th>
+					<th th:text="#{comun.fini}">default</th>
+					<th th:text="#{comun.fFin}">default</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="linea : ${paginacion.contenido}">
+					<td th:text="${linea.tipo}">ID</td>
+					<td th:text="${linea.nombre}">ID</td>
+					<td class="text-end" th:text="${linea.p100}">ID</td>
+					<td th:text="${#temporals.format(linea.fechaIni, 'dd/MM/yyyy')}">ID</td>
+					<td th:text="${#temporals.format(linea.fechaFin, 'dd/MM/yyyy')}">ID</td>
+					<td><button th:onclick="'cargarDatosFormulario(' + ${linea.id} + ')'" class="btn btn-primary"><i class="bi bi-pencil-square"></i>Editar</button>
+				</tr>
+			</tbody>
+		</table>
+        <div th:replace="~{fragments/paginacionComun :: paginador(${paginacion}, '')}"></div>
+	</div>
+	<script>
+		function cargarDatosFormulario(id) {
+	    // Hacemos la petición al controlador de Spring Boot
+	    fetch('/admin/impuesto/' + id)
+	        .then(response => response.text()) // Convertimos la respuesta a texto/HTML
+	        .then(htmlFragmento => {
+	            // Reemplazamos el viejo formulario por el nuevo ya relleno
+	            document.getElementById('formularioImpuesto').innerHTML = htmlFragmento;
+	        })
+	        .catch(error => console.error('Error al cargar el formulario:', error));
+		}
+	</script>
+</section>
+</body>
+</html>
