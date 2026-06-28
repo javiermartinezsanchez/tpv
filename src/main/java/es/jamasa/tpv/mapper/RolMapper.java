@@ -2,7 +2,7 @@ package es.jamasa.tpv.mapper;
 
 import org.springframework.stereotype.Component;
 
-import es.jamasa.tpv.dto.RolDTO;
+import es.jamasa.tpv.model.dto.RolDTO;
 import es.jamasa.tpv.model.entities.Rol;
 
 /**

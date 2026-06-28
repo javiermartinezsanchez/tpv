@@ -2,7 +2,7 @@ package es.jamasa.tpv.service;
 
 import java.util.List;
 
-import es.jamasa.tpv.dto.RolDTO;
+import es.jamasa.tpv.model.dto.RolDTO;
 
 /**
  * Clase service del modelo de negocio para la entidad {@code Rol}

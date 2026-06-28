@@ -1,4 +1,4 @@
-package es.jamasa.tpv.dto;
+package es.jamasa.tpv.model.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

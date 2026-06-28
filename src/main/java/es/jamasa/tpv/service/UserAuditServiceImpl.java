@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import es.jamasa.tpv.dto.AccesoPorDia;
-import es.jamasa.tpv.dto.UserAuditDTO;
 import es.jamasa.tpv.mapper.UserAuditMapper;
+import es.jamasa.tpv.model.dto.AccesoPorDia;
+import es.jamasa.tpv.model.dto.UserAuditDTO;
 import es.jamasa.tpv.model.entities.UserAudit;
 import es.jamasa.tpv.model.records.PageParams;
 import es.jamasa.tpv.model.repository.UserAuditRepository;

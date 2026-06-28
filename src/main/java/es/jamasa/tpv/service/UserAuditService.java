@@ -3,8 +3,8 @@ package es.jamasa.tpv.service;
 import java.util.List;
 import java.util.Map;
 
-import es.jamasa.tpv.dto.AccesoPorDia;
-import es.jamasa.tpv.dto.UserAuditDTO;
+import es.jamasa.tpv.model.dto.AccesoPorDia;
+import es.jamasa.tpv.model.dto.UserAuditDTO;
 import es.jamasa.tpv.model.entities.UserAudit;
 import es.jamasa.tpv.model.records.PageParams;
 import es.jamasa.tpv.model.util.Paginacion;

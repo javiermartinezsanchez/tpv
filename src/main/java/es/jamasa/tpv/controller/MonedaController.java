@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import es.jamasa.tpv.dto.MonedaDTO;
+import es.jamasa.tpv.model.dto.MonedaDTO;
 import es.jamasa.tpv.service.MonedaService;
 import jakarta.validation.Valid;
 

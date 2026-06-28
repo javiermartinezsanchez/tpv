@@ -3,7 +3,7 @@ package es.jamasa.tpv.service;
 import java.util.List;
 import java.util.Map;
 
-import es.jamasa.tpv.dto.ImpuestoDTO;
+import es.jamasa.tpv.model.dto.ImpuestoDTO;
 import es.jamasa.tpv.model.entities.Impuesto;
 import es.jamasa.tpv.model.records.PageParams;
 import es.jamasa.tpv.model.util.Paginacion;

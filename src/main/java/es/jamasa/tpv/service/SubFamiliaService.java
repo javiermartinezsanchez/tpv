@@ -2,7 +2,7 @@ package es.jamasa.tpv.service;
 
 import java.util.Map;
 
-import es.jamasa.tpv.dto.SubFamiliaDTO;
+import es.jamasa.tpv.model.dto.SubFamiliaDTO;
 import es.jamasa.tpv.model.entities.SubFamilia;
 import es.jamasa.tpv.model.records.PageParams;
 import es.jamasa.tpv.model.util.Paginacion;

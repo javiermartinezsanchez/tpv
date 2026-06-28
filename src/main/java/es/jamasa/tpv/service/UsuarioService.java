@@ -5,10 +5,10 @@ import java.util.Map;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import es.jamasa.tpv.dto.UserPasswordAdminChangeDTO;
-import es.jamasa.tpv.dto.UserPasswordChangeDTO;
-import es.jamasa.tpv.dto.UserSessionInfoDTO;
-import es.jamasa.tpv.dto.UsuarioRegistroDTO;
+import es.jamasa.tpv.model.dto.UserPasswordAdminChangeDTO;
+import es.jamasa.tpv.model.dto.UserPasswordChangeDTO;
+import es.jamasa.tpv.model.dto.UserSessionInfoDTO;
+import es.jamasa.tpv.model.dto.UsuarioRegistroDTO;
 import es.jamasa.tpv.model.entities.Usuario;
 import es.jamasa.tpv.model.records.PageParams;
 import es.jamasa.tpv.model.util.Paginacion;

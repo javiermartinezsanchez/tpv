@@ -1,4 +1,4 @@
-package es.jamasa.tpv.dto;
+package es.jamasa.tpv.model.dto;
 /** DTO para la valoración de los cursos/módulos
  * 
  *  Se utilizará para intercambiar información con la vista.

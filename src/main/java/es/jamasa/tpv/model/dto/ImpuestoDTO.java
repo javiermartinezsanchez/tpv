@@ -1,4 +1,4 @@
-package es.jamasa.tpv.dto;
+package es.jamasa.tpv.model.dto;
 
 
 import java.math.BigDecimal;

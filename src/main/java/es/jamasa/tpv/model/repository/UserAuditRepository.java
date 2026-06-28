@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import es.jamasa.tpv.dto.AccesoPorDia;
+import es.jamasa.tpv.model.dto.AccesoPorDia;
 import es.jamasa.tpv.model.entities.UserAudit;
 /**
  * Repositorio de la entidad UserAudit (Auditoría de accesos).
@@ -26,7 +26,7 @@ public interface UserAuditRepository extends JpaRepository<UserAudit, Long>{
 	 */
 	Page<UserAudit> findByfechaAuditBetween( LocalDateTime fechaIni, LocalDateTime fechaFin, Pageable page);
 
-	@Query("SELECT new es.jamasa.tpv.dto.AccesoPorDia(CAST(a.fechaAudit AS LocalDate), COUNT(a)) " +
+	@Query("SELECT new es.jamasa.tpv.model.dto.AccesoPorDia(CAST(a.fechaAudit AS LocalDate), COUNT(a)) " +
 	           "FROM UserAudit a " +
 	           "WHERE a.fechaAudit BETWEEN :fechaIni AND :fechaFin " +
 	           " and a.mensaje = 'Login usuario' " +

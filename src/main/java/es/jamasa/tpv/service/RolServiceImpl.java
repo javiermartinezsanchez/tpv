@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import es.jamasa.tpv.dto.RolDTO;
 import es.jamasa.tpv.mapper.RolMapper;
+import es.jamasa.tpv.model.dto.RolDTO;
 import es.jamasa.tpv.model.repository.RolRepository;
 
 @Service

@@ -17,12 +17,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import es.jamasa.tpv.dto.UserPasswordAdminChangeDTO;
-import es.jamasa.tpv.dto.UserPasswordChangeDTO;
-import es.jamasa.tpv.dto.UserSessionInfoDTO;
-import es.jamasa.tpv.dto.UsuarioRegistroDTO;
 import es.jamasa.tpv.exception.UserPasswordNotMatchException;
 import es.jamasa.tpv.mapper.UsuarioRegistroMapper;
+import es.jamasa.tpv.model.dto.UserPasswordAdminChangeDTO;
+import es.jamasa.tpv.model.dto.UserPasswordChangeDTO;
+import es.jamasa.tpv.model.dto.UserSessionInfoDTO;
+import es.jamasa.tpv.model.dto.UsuarioRegistroDTO;
 import es.jamasa.tpv.model.entities.SecurityUser;
 import es.jamasa.tpv.model.entities.Usuario;
 import es.jamasa.tpv.model.records.PageParams;

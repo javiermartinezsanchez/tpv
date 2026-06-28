@@ -6,7 +6,7 @@ package es.jamasa.tpv.mapper;
  */
 import org.springframework.stereotype.Component;
 
-import es.jamasa.tpv.dto.UserAuditDTO;
+import es.jamasa.tpv.model.dto.UserAuditDTO;
 import es.jamasa.tpv.model.entities.UserAudit;
 
 /**

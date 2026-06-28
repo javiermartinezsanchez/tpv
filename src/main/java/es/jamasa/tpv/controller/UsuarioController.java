@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import es.jamasa.tpv.dto.UserPasswordAdminChangeDTO;
-import es.jamasa.tpv.dto.UserPasswordChangeDTO;
-import es.jamasa.tpv.dto.UsuarioRegistroDTO;
 import es.jamasa.tpv.mapper.UsuarioRegistroMapper;
+import es.jamasa.tpv.model.dto.UserPasswordAdminChangeDTO;
+import es.jamasa.tpv.model.dto.UserPasswordChangeDTO;
+import es.jamasa.tpv.model.dto.UsuarioRegistroDTO;
 import es.jamasa.tpv.model.entities.SecurityUser;
 import es.jamasa.tpv.model.entities.Usuario;
 import es.jamasa.tpv.model.util.Paginacion;

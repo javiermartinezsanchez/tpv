@@ -2,7 +2,7 @@ package es.jamasa.tpv.mapper;
 
 import org.springframework.stereotype.Component;
 
-import es.jamasa.tpv.dto.MonedaDTO;
+import es.jamasa.tpv.model.dto.MonedaDTO;
 import es.jamasa.tpv.model.entities.Moneda;
 @Component
 public class MonedaMapper {

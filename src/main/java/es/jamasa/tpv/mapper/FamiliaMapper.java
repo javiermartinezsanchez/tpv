@@ -3,7 +3,7 @@ package es.jamasa.tpv.mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import es.jamasa.tpv.dto.FamiliaDTO;
+import es.jamasa.tpv.model.dto.FamiliaDTO;
 import es.jamasa.tpv.model.entities.Familia;
 import es.jamasa.tpv.model.repository.ImpuestoRepository;
 

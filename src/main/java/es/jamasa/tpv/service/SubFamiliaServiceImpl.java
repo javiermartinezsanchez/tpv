@@ -9,8 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import es.jamasa.tpv.dto.SubFamiliaDTO;
 import es.jamasa.tpv.mapper.SubFamiliaMapper;
+import es.jamasa.tpv.model.dto.SubFamiliaDTO;
 import es.jamasa.tpv.model.entities.SubFamilia;
 import es.jamasa.tpv.model.records.PageParams;
 import es.jamasa.tpv.model.repository.SubFamiliaRepository;

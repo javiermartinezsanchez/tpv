@@ -11,8 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import es.jamasa.tpv.dto.ImpuestoDTO;
 import es.jamasa.tpv.mapper.ImpuestoMapper;
+import es.jamasa.tpv.model.dto.ImpuestoDTO;
 import es.jamasa.tpv.model.entities.Impuesto;
 import es.jamasa.tpv.model.records.PageParams;
 import es.jamasa.tpv.model.repository.ImpuestoRepository;

@@ -7,7 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import es.jamasa.tpv.dto.MonedaDTO;
+import es.jamasa.tpv.model.dto.MonedaDTO;
 import es.jamasa.tpv.model.entities.Moneda;
 import es.jamasa.tpv.mapper.MonedaMapper;
 import es.jamasa.tpv.model.records.PageParams;

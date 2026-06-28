@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Component;
 
-import es.jamasa.tpv.dto.SubFamiliaDTO;
+import es.jamasa.tpv.model.dto.SubFamiliaDTO;
 import es.jamasa.tpv.model.entities.Familia;
 import es.jamasa.tpv.model.entities.SubFamilia;
 

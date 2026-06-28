@@ -2,7 +2,7 @@ package es.jamasa.tpv.mapper;
 
 import org.springframework.stereotype.Component;
 
-import es.jamasa.tpv.dto.UsuarioRegistroDTO;
+import es.jamasa.tpv.model.dto.UsuarioRegistroDTO;
 import es.jamasa.tpv.model.entities.Usuario;
 
 /**

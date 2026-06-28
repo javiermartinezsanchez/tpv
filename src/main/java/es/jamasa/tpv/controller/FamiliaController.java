@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import es.jamasa.tpv.dto.FamiliaDTO;
+import es.jamasa.tpv.model.dto.FamiliaDTO;
 import es.jamasa.tpv.service.FamiliaService;
 import es.jamasa.tpv.service.ImpuestoService;
 import jakarta.validation.Valid;

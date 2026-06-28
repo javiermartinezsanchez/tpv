@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import es.jamasa.tpv.dto.SubFamiliaDTO;
+import es.jamasa.tpv.model.dto.SubFamiliaDTO;
 import es.jamasa.tpv.service.SubFamiliaService;
 import jakarta.validation.Valid;
 @Controller
@@ -31,7 +31,7 @@ public class SubFamiliaController extends BaseCrudController {
             @RequestParam(defaultValue = "0") int page,
             Model model) {
 		setModeloListado(model, "admin/subfamilias", "","/admin/subfamilia/guardar" , "/home");
-		model.addAttribute("subFamilia", new SubFamiliaDTO());
+		model.addAttribute("subfamilia", new SubFamiliaDTO());
 		model.addAttribute("paginacion", subFamiliaService.listadoPaginado(paramsToMap(paramsBusqueda), getParams(page)));
 	return model.getAttribute("viewName").toString(); 
 	}
@@ -53,7 +53,7 @@ public class SubFamiliaController extends BaseCrudController {
 	public String modifica(Model model, @PathVariable Long id) {
 		
 		setModeloFormulario(model,"admin/familias", "/admin/familia/guardar", "/admin/familia");
-		model.addAttribute("subFamilia", subFamiliaService.get(id));
+		model.addAttribute("subfamilia", subFamiliaService.get(id));
 		return "admin/subfamilias :: formularioSubFamilia";
 	}
 }

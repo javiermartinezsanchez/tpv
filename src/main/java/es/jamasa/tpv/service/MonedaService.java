@@ -2,7 +2,7 @@ package es.jamasa.tpv.service;
 
 import java.util.Map;
 
-import es.jamasa.tpv.dto.MonedaDTO;
+import es.jamasa.tpv.model.dto.MonedaDTO;
 import es.jamasa.tpv.model.entities.Moneda;
 import es.jamasa.tpv.model.records.PageParams;
 import es.jamasa.tpv.model.util.Paginacion;
